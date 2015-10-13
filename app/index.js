@@ -12,10 +12,10 @@ function resizeHandler() {
   webgl.resize(window.innerWidth, window.innerHeight);
 }
 
-function animate() {
+function animate(ts) {
   raf(animate);
 
-  webgl.render();
+  webgl.render(ts);
 }
 
 function initGUI() {

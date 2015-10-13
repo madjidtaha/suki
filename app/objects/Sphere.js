@@ -8,21 +8,25 @@ export default class Sphere extends THREE.Object3D {
     super();
 
     // this.geom = new THREE.PlaneGeometry( 35, 25, 42 );
-    this.geom = new THREE.IcosahedronGeometry( 15, 2 );
+    this.geom = new THREE.IcosahedronGeometry( 35, 4 );
     this.mat = new THREE.ShaderMaterial( {
       uniforms: {
         tExplosion: {
           type: 't',
-          value: THREE.ImageUtils.loadTexture( 'explosion.png' ),
+          value: THREE.ImageUtils.loadTexture( 'assets/textures/explosion.png' ),
         },
         time: { // float initialized to 0
           type: 'f',
           value: 0.0,
         },
+        resolution: { // float initialized to 0
+          type: 'v2',
+          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+        },
       },
       vertexShader: glslify('./vertex.glsl'),
       fragmentShader: glslify('./fragment.glsl'),
-      wireframe: true,
+      // wireframe: true,
     });
     // this.mat = new THREE.MeshBasicMaterial({
     //   color: 0x00aaff,
