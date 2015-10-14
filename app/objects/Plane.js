@@ -8,8 +8,8 @@ export default class Plane extends THREE.Object3D {
     super();
 
     // this.geom = new THREE.PlaneGeometry( 35, 25, 42 );
-    this.geom = new THREE.PlaneGeometry(100, 100, 20, 20);
-    this.mat = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true});
+    this.geom = new THREE.PlaneGeometry(1000, 1000, 50, 50);
+    this.mat = new THREE.MeshBasicMaterial({color: 0x69ff96, wireframe: true});
     // this.mat = new THREE.ShaderMaterial( {
     //   uniforms: {
     //     time: { // float initialized to 0
@@ -21,9 +21,9 @@ export default class Plane extends THREE.Object3D {
     //       value: new THREE.Vector2(window.innerWidth, window.innerHeight),
     //     },
     //   },
-    //   vertexShader: glslify('./vertex.glsl'),
-    //   fragmentShader: glslify('./fragment.glsl'),
-    //   // wireframe: true,
+    //   vertexShader: glslify('../shaders/Sphere/vertex.glsl'),
+    //   fragmentShader: glslify('../shaders/Sphere/fragment.glsl'),
+    //   wireframe: true,
     // });
     // this.mat = new THREE.MeshBasicMaterial({
     //   color: 0x00aaff,
@@ -33,7 +33,10 @@ export default class Plane extends THREE.Object3D {
     // this.rotation.x = 0.5;
     // this.rotation.z = 0.5;
 
-    this.mesh.rotation.x = -0.3 * Math.PI;
+    this.mesh.rotation.x = -0.45 * Math.PI;
+    this.mesh.rotation.y = 0.000000001;
+    this.mesh.rotation.Z = 0.000000001;
+
     // this.mesh.position.set(0, 90, 100);
 
     console.log(this.geom.vertices);
@@ -42,6 +45,8 @@ export default class Plane extends THREE.Object3D {
   }
 
   update(ts) {
+    // this.mat.uniforms.time.value = 0.00025 * ( Date.now() - start );
+    // return;
     // console.log(ts);
     // this.mat.uniforms.time.value = 0.00025 * ( Date.now() - start );
     const center = new THREE.Vector2(0, 0);

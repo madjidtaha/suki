@@ -14,7 +14,13 @@
     "module": true,
     "require": true,
     "System": true,
-    "user": true
+    "user": true,
+    "TweenMax": true,
+    "TimelineMax": true,
+    "Power1": true,
+    "Power2": true,
+    "Power3": true,
+    "Power4": true
   },
 
   "rules": {

@@ -19,7 +19,8 @@
     "glslify": "^2.3.1",
     "gsap": "^1.17.0",
     "raf": "^3.0.0",
-    "three": "^0.71.0"
+    "three": "^0.71.0",
+    "three-orbit-controls": "^71.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.3",

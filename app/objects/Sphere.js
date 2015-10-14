@@ -19,13 +19,21 @@ export default class Sphere extends THREE.Object3D {
           type: 'f',
           value: 0.0,
         },
+        soundFreq: { // float initialized to 0
+          type: 'f',
+          value: 0.0,
+        },
+        soundTime: { // float initialized to 0
+          type: 'f',
+          value: 0.0,
+        },
         resolution: { // float initialized to 0
           type: 'v2',
           value: new THREE.Vector2(window.innerWidth, window.innerHeight),
         },
       },
-      vertexShader: glslify('./vertex.glsl'),
-      fragmentShader: glslify('./fragment.glsl'),
+      vertexShader: glslify('../shaders/Sphere/vertex.glsl'),
+      fragmentShader: glslify('../shaders/Sphere/fragment.glsl'),
       // wireframe: true,
     });
     // this.mat = new THREE.MeshBasicMaterial({
@@ -39,8 +47,16 @@ export default class Sphere extends THREE.Object3D {
     this.add(this.mesh);
   }
 
-  update() {
+  update(ts, sound) {
+    const freq = sound.freq / 256;
+    const time = sound.time / 256;
+    console.log('time, freq', time, freq);
     this.mat.uniforms.time.value = 0.00025 * ( Date.now() - start );
+    this.mat.uniforms.soundFreq.value = freq;
+    this.mat.uniforms.soundTime.value = time;
+    // if (freq) this.mesh.scale.set(2 * (freq + time) * 2, 2 * (freq + time) * 2, 2 * (freq + time) * 2);
+    // console.log('mesh ', this.mesh.scale.x);
+    // this.mat.uniforms.time.value = 0.00025 * ( Date.now() - start );
     // this.geom.vertices;
     //
     // this.rotation.x += 0.01;
