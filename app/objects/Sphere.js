@@ -50,7 +50,7 @@ export default class Sphere extends THREE.Object3D {
   update(ts, sound) {
     const freq = sound.freq / 256;
     const time = sound.time / 256;
-    console.log('time, freq', time, freq);
+    // console.log('time, freq', time, freq);
     this.mat.uniforms.time.value = 0.00025 * ( Date.now() - start );
     this.mat.uniforms.soundFreq.value = freq;
     this.mat.uniforms.soundTime.value = time;
