@@ -116,7 +116,6 @@ export default class Sphere extends THREE.Object3D {
     this.stripeCurr += ( stripeDest - this.stripeCurr ) * 0.8;
     // FIXME Really ugly
     window.light.color.setRGB(intensity, intensity, intensity);
-    console.log(intensity);
     if (!window.isPlaying) this.stripeCurr = 0;
     this.stripesMaterial.uniforms.stripe.value = this.stripeCurr;
 
