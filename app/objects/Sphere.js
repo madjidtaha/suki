@@ -85,13 +85,18 @@ export default class Sphere extends THREE.Object3D {
   }
 
   update(ts, sound) {
-    const freq = sound.freq / 256;
-    const time = sound.time / 256;
+    const freq = sound.freq.low.value;
+    const time = sound.time.low.value;
+
+    // const freq = sound.freq.medium.value;
+    // const time = sound.time.medium.value;
+
     const currentTime = 0.00025 * ( Date.now() - start );
     // console.log('time, freq', time, freq);
     this.sphereMaterial.uniforms.time.value = currentTime;
     this.sphereMaterial.uniforms.soundFreq.value = freq;
     this.sphereMaterial.uniforms.soundTime.value = time;
+
 
     this.stripesMaterial.uniforms.time.value = currentTime;
     this.stripesMaterial.uniforms.soundFreq.value = freq;
@@ -102,7 +107,10 @@ export default class Sphere extends THREE.Object3D {
     stripeDest = (stripeDest > 20.0) ? 20.0 : stripeDest;
     stripeDest = (stripeDest < 2.0) ? 2.0 : stripeDest;
 
+
     this.stripeCurr += ( stripeDest - this.stripeCurr ) * 0.8;
+    if (!window.isPlaying) this.stripeCurr = 0;
+    console.log(this.stripeCurr);
     this.stripesMaterial.uniforms.stripe.value = this.stripeCurr;
 
     const scaleDest = 1.2 * (freq + time);

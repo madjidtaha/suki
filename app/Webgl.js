@@ -1,6 +1,7 @@
 import Sphere from './objects/Sphere';
 import Buffer from './objects/Buffer';
 import Plane from './objects/Plane';
+import Light from './objects/Light';
 import THREE from 'three';
 import Sound from './core/Sound';
 window.THREE = THREE;
@@ -15,15 +16,19 @@ export default class Webgl {
     // this.camera.position.y = 550;
     this.camera.position.set(435, 23, 336);
     this.camera.rotation.set(0, 1, 0);
+    this.light = new Light();
     // this.camera.rotation.x = -1;
 
     this.controls = new OrbitControls(this.camera);
 
-    this.renderer = new THREE.WebGLRenderer();
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: document.getElementById('canvas'),
+    });
+
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
     this.renderer.setClearColor(0x00C3FF);
-
+    this.renderer.shadowMapType = THREE.PCFSoftShadowMap;
     this.usePostprocessing = true;
     this.composer = new WAGNER.Composer(this.renderer);
     this.composer.setSize(width, height);
@@ -34,20 +39,19 @@ export default class Webgl {
     this.buffer = new Buffer();
     this.sphere.position.set(0, -10, 0);
     // this.plane.position.set(0, -70, 0);
-    this.plane.position.set(20, -70, 0);
+    this.plane.position.set(65, -249, -159);
+    this.plane.rotation.set(1.5, 0.7, -0.3);
     this.scene.add(this.sphere);
-    // this.scene.add(this.plane);
+    this.scene.add(this.plane);
+    this.scene.add(this.light);
+
     // this.scene.add(this.buffer);
 
     const music = Math.floor(Math.random() * 2 + 1.5);
 
     // TODO CHANGE
-    Sound.load(`/assets/mp3/02.mp3`);
-  //
-    Sound.on('start', () => {
-      console.log('BLAA');
-      // debugger;
-    });
+
+
 
     // TweenMax.to(this.camera.position, 2, {
     //   y: 0,
@@ -71,6 +75,19 @@ export default class Webgl {
     this.multiPassBloomPass = new WAGNER.MultiPassBloomPass();
     this.fxaaPass = new WAGNER.FXAAPass();
 
+  }
+
+  launchSound() {
+    Sound.load(`/assets/mp3/02.mp3`);
+  //
+    Sound.on('start', () => {
+      // FIXME REALLY, REALLY, REALLY UGLY
+      // Sorry for you later when you will need to fix a shit ugly like this
+      // presentation is tomorrow, I need to finish quickly to sleep
+      window.isPlaying = true;
+
+      // debugger;
+    });
   }
 
   resize(width, height) {
@@ -100,30 +117,81 @@ export default class Webgl {
     }
     // console.log(Sound.getData().freq, Sound.getData().time);
 
-    let freq = 0;
-    let time = 0;
+    const freq = {
+      low: {
+        length: 0,
+        value: 0,
+      },
+      medium: {
+        length: 0,
+        value: 0,
+      },
+      high: {
+        length: 0,
+        value: 0,
+      },
+    };
+    const time = {
+      low: {
+        length: 0,
+        value: 0,
+      },
+      medium: {
+        length: 0,
+        value: 0,
+      },
+      high: {
+        length: 0,
+        value: 0,
+      },
+    };
     const freqArray = Sound.getData().freq;
     const freqLength = Sound.getData().freq.length;
-
-    for (let i = 0; i < freqLength; i++) {
-      freq += freqArray[i];
-    }
-    freq /= freqLength;
 
     const timeArray = Sound.getData().time;
     const timeLength = Sound.getData().time.length;
 
-    for (let i = 0; i < timeLength; i++) {
-      time += timeArray[i];
+    // if (timeArray[100] != 128) {
+    //   console.log(freqArray);
+    //   console.log(timeArray);
+    //   debugger;
+    // }
+    for (let i = 0; i < freqLength; i++) {
+
+      if (i < freqLength / 3) {
+        freq.low.value += freqArray[i];
+        time.low.value += timeArray[i];
+        freq.low.length++;
+        time.low.length++;
+      } else if (i < (freqLength / 3) * 2) {
+        freq.medium.value += freqArray[i];
+        time.medium.value += timeArray[i];
+        freq.medium.length++;
+        time.medium.length++;
+      } else {
+        freq.high.value += freqArray[i];
+        time.high.value += timeArray[i];
+        freq.high.length++;
+        time.high.length++;
+      }
+
     }
-    time /= timeLength;
+
+    freq.low.value = (freq.low.value / freq.low.length) / 256;
+    time.low.value = (time.low.value / time.low.length) / 256;
+
+    freq.medium.value = (freq.medium.value / freq.medium.length) / 256;
+    time.medium.value = (time.medium.value / time.medium.length) / 256;
+
+    freq.high.value = (freq.high.value / freq.high.length) / 256;
+    time.high.value = (time.high.value / time.high.length) / 256;
 
     // console.log('Audio', time, freq);
 
     // if (ts > 24000) debugger;
 
     this.sphere.update(ts, {freq, time});
-    // this.plane.update(ts);
+    this.plane.update(ts);
     // this.buffer.update();
   }
 }

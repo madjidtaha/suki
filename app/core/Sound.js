@@ -7,6 +7,9 @@ class Sound extends Emitter {
   constructor() {
     super();
 
+    window.AudioContext = window.AudioContext || window.webkitAudioContext || false;
+
+    if (!AudioContext) return;
     this._context = new AudioContext();
 
     this._bufferSize = 512; // change this value for more or less data
@@ -39,6 +42,11 @@ class Sound extends Emitter {
       this._source.buffer = buffer;
       this._source.connect( this._context.destination );
       this._source.start( 0 );
+      this._source.onended = ()=> {
+        window.isPlaying = false;
+        document.getElementsByClassName('splashScreen')[0].classList.remove('is-hidden');
+        document.getElementsByClassName('splashScreen__button')[0].textContent = 'Retry the experiment';
+      }
 
       this.emit( 'start' );
     }, () => {

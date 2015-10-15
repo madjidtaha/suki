@@ -30,6 +30,7 @@
     "browserify": "^10.2.1",
     "eslint": "^1.6.0",
     "eslint-config-airbnb": "^0.1.0",
+    "stats-js": "^1.0.0-alpha1",
     "stripify": "^3.0.0",
     "uglifyjs": "^2.4.10",
     "watchify": "^3.2.1"
