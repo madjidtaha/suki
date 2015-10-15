@@ -15,6 +15,7 @@
     "dat-gui": "^0.5.0",
     "domready": "^1.0.8",
     "event-emitter": "^0.3.4",
+    "glsl-hsv2rgb": "^1.0.0",
     "glsl-noise": "0.0.0",
     "glslify": "^2.3.1",
     "gsap": "^1.17.0",

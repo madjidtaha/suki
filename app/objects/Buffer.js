@@ -44,7 +44,6 @@ export default class Buffer extends THREE.Object3D {
 
     // this.rotation.x = 0.5;
     // this.rotation.z = 0.5;
-    console.log(this.geom.vertices);
     this.add(this.mesh);
   }
 

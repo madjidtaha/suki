@@ -39,7 +39,6 @@ export default class Plane extends THREE.Object3D {
 
     // this.mesh.position.set(0, 90, 100);
 
-    console.log(this.geom.vertices);
     this.add(this.mesh);
     console.log('create');
   }

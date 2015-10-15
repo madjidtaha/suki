@@ -12,19 +12,19 @@ export default class Webgl {
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(15, width / height, 1, 1000);
-    // this.camera.position.z = 550;
-    this.camera.position.y = 550;
-    this.camera.position.z = 550;
-    this.camera.rotation.x = -1;
+    // this.camera.position.y = 550;
+    this.camera.position.set(435, 23, 336);
+    this.camera.rotation.set(0, 1, 0);
+    // this.camera.rotation.x = -1;
 
-    // this.controls = new OrbitControls(this.camera);
+    this.controls = new OrbitControls(this.camera);
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
-    this.renderer.setClearColor(0x292929);
+    this.renderer.setClearColor(0x00C3FF);
 
-    this.usePostprocessing = false;
+    this.usePostprocessing = true;
     this.composer = new WAGNER.Composer(this.renderer);
     this.composer.setSize(width, height);
     this.initPostprocessing();
@@ -41,20 +41,24 @@ export default class Webgl {
 
     const music = Math.floor(Math.random() * 2 + 1.5);
 
-    Sound.load(`/assets/mp3/0${music}.mp3`);
+    // TODO CHANGE
+    Sound.load(`/assets/mp3/02.mp3`);
   //
-    Sound.on('start', () => console.log('BLAA'));
-
-    TweenMax.to(this.camera.position, 2, {
-      y: 0,
-      delay: 0.5,
-      ease: Power4.easeOut,
+    Sound.on('start', () => {
+      console.log('BLAA');
+      // debugger;
     });
 
-    TweenMax.to(this.camera.rotation, 2, {
-      x: 0,
-      delay: 0.5,
-    });
+    // TweenMax.to(this.camera.position, 2, {
+    //   y: 0,
+    //   delay: 0.5,
+    //   ease: Power4.easeOut,
+    // });
+    //
+    // TweenMax.to(this.camera.rotation, 2, {
+    //   x: 0,
+    //   delay: 0.5,
+    // });
   }
 
   initPostprocessing() {
