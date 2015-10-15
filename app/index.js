@@ -72,7 +72,8 @@ function startExperiment() {
 
 
 domready(() => {
-  //FIXME Go to Webgl.js and read
+
+  // FIXME Go to Webgl.js and read
   window.isPlaying = false;
 
 

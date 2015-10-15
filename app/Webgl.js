@@ -17,6 +17,7 @@ export default class Webgl {
     this.camera.position.set(435, 23, 336);
     this.camera.rotation.set(0, 1, 0);
     this.light = new Light();
+    window.light = this.light;
     // this.camera.rotation.x = -1;
 
     this.controls = new OrbitControls(this.camera);
@@ -27,7 +28,7 @@ export default class Webgl {
 
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
-    this.renderer.setClearColor(0x00C3FF);
+    this.renderer.setClearColor(0x506f86);
     this.renderer.shadowMapType = THREE.PCFSoftShadowMap;
     this.usePostprocessing = true;
     this.composer = new WAGNER.Composer(this.renderer);
@@ -50,8 +51,6 @@ export default class Webgl {
     const music = Math.floor(Math.random() * 2 + 1.5);
 
     // TODO CHANGE
-
-
 
     // TweenMax.to(this.camera.position, 2, {
     //   y: 0,

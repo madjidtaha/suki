@@ -14,8 +14,10 @@ export default class Sphere extends THREE.Object3D {
     this.stripesCurr = scaleValue;
 
     // this.geom = new THREE.PlaneGeometry( 35, 25, 42 );
-    this.sphereGeometry = new THREE.IcosahedronGeometry( 25, 4 );
-    this.stripesGeometry = new THREE.IcosahedronGeometry( 45, 4 );
+    // this.sphereGeometry = new THREE.IcosahedronGeometry( 25, 4 );
+    this.sphereGeometry = new THREE.SphereGeometry( 35, 100, 100 );
+    // this.stripesGeometry = new THREE.IcosahedronGeometry( 45, 4 );
+    this.stripesGeometry = new THREE.SphereGeometry( 45, 200, 200 );
     this.sphereMaterial = new THREE.ShaderMaterial( {
       uniforms: {
         time: { // float initialized to 0
@@ -104,13 +106,18 @@ export default class Sphere extends THREE.Object3D {
 
     let stripeDest = stripeSize;
     stripeDest *= (freq + time);
+    let intensity = ((stripeDest - 22) / 10 ) > 1 ? 1 : ((stripeDest - 22) / 10 );
+    intensity = intensity < 0.3 ? 0.3 : intensity;
+
     stripeDest = (stripeDest > 20.0) ? 20.0 : stripeDest;
     stripeDest = (stripeDest < 2.0) ? 2.0 : stripeDest;
 
 
     this.stripeCurr += ( stripeDest - this.stripeCurr ) * 0.8;
+    // FIXME Really ugly
+    window.light.color.setRGB(intensity, intensity, intensity);
+    console.log(intensity);
     if (!window.isPlaying) this.stripeCurr = 0;
-    console.log(this.stripeCurr);
     this.stripesMaterial.uniforms.stripe.value = this.stripeCurr;
 
     const scaleDest = 1.2 * (freq + time);

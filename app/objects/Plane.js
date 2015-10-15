@@ -11,6 +11,7 @@ export default class Plane extends THREE.Object3D {
     this.geom = new THREE.PlaneGeometry(2000, 2000, 40, 40);
     this.mat = new THREE.MeshPhongMaterial(
       {
+        // color: 0xC0970E,
         color: 0x506f86,
         // wireframe: true,
         side: THREE.DoubleSide,
@@ -60,7 +61,7 @@ export default class Plane extends THREE.Object3D {
       const v = this.geom.vertices[i];
       const dist = new THREE.Vector2(v.x, v.y).sub(center);
       const size = 5.0;
-      const magnitude = 16;
+      const magnitude = 4;
       v.z = Math.sin(dist.length() / -size + (ts / 500)) * magnitude;
     }
     this.geom.verticesNeedUpdate = true;
