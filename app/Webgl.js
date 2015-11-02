@@ -17,10 +17,12 @@ export default class Webgl {
     this.camera.position.set(435, 23, 336);
     this.camera.rotation.set(0, 1, 0);
     this.light = new Light();
-    window.light = this.light;
+    // window.light = this.light;
     // this.camera.rotation.x = -1;
 
     this.controls = new OrbitControls(this.camera);
+    this.controls.enabled = false;
+
 
     this.renderer = new THREE.WebGLRenderer({
       canvas: document.getElementById('canvas'),
@@ -28,7 +30,7 @@ export default class Webgl {
 
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
-    this.renderer.setClearColor(0x506f86);
+    this.renderer.setClearColor(0xF9FF9B);
     this.renderer.shadowMapType = THREE.PCFSoftShadowMap;
     this.usePostprocessing = true;
     this.composer = new WAGNER.Composer(this.renderer);
@@ -43,8 +45,8 @@ export default class Webgl {
     this.plane.position.set(65, -249, -159);
     this.plane.rotation.set(1.5, 0.7, -0.3);
     this.scene.add(this.sphere);
-    this.scene.add(this.plane);
-    this.scene.add(this.light);
+    // this.scene.add(this.plane);
+    // this.scene.add(this.light);
 
     // this.scene.add(this.buffer);
 
@@ -77,7 +79,7 @@ export default class Webgl {
   }
 
   launchSound() {
-    Sound.load(`/assets/mp3/02.mp3`);
+    Sound.load(`./assets/mp3/02.mp3`);
   //
     Sound.on('start', () => {
       // FIXME REALLY, REALLY, REALLY UGLY
@@ -105,7 +107,7 @@ export default class Webgl {
       this.composer.renderer.clear();
       this.composer.render(this.scene, this.camera);
       if (this.useAsciiPass) this.composer.pass(this.asciiPass);
-      this.composer.pass(this.vignette2Pass);
+      // this.composer.pass(this.vignette2Pass);
       this.composer.pass(this.fxaaPass);
       // this.composer.pass(this.multiPassBloomPass);
       this.composer.toScreen();

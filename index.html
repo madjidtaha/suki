@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Awesome Experiment</title>
+  <title>Suki</title>
   <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Fira+Mono:400,700' rel='stylesheet' type='text/css'>
   <link href='assets/fonts/stylesheet.css' rel='stylesheet' type='text/css'>
   <style>
     body, html {
@@ -12,6 +13,7 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
+      background-color: #F9FF9B;
     }
     canvas {
       position: absolute;
@@ -24,6 +26,8 @@
       height: 100%;
 
       z-index: 1;
+      background-color: #F9FF9B;
+
 
     }
 
@@ -35,7 +39,7 @@
       bottom: 0;
       z-index: 9;
       color: white;
-      background-color: rgba(10,10,10, 0.5);
+      /*background-color: rgba(10,10,10, 0.5);*/
       opacity: 1;
       transition: opacity 0.5s ease-out;
     }
@@ -49,58 +53,97 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 80vw;
-      height: 80vh;
+      width: 90vw;
+      height: 90vh;
       transform: translate(-50%,-50%);
-
-      background-color: rgba(255,255,255, 0.5);
+      /*background-color: rgba(255,255,255, 0.5);*/
 
     }
 
     .splashScreen__title {
       position: absolute;
       top: 50px;
-      left:0;
-      width: 100%;
-      font-family: 'railwayregular';
-      font-size: 64px;
+      right: 0;
+      width: 345.5px;
+      height: 125.5px;
+      /*font-family: 'railwayregular';*/
+      /*font-size: 64px;*/
       text-align: center;
+    }
+    .splashScreen__title img{
+      width: 100%;
+      height: auto;
     }
 
     .splashScreen__button {
       position: absolute;
-      bottom: 25%;
+      top: 50%;
       left: 50%;
-      --webkit-appareance: none;
       appareance: none;
       border: 0;
-      background-color: white;
+      color: #F9FF9B;
+      background-color: #6DC6F6;
       font-size: 13px;
       padding: 10px 30px;
       border-radius: 20px;
       transform: translate(-50%,0);
-      transition: background-color 0.25s ease-out, color 0.25s ease-out;
-
+      /*transition: background-color 0.25s ease-out, color 0.25s ease-out;*/
+      box-shadow: -10px 10px 0px #8EF66D;
       cursor: pointer;
-
-
-      font-family: 'Lato';
+      text-transform: uppercase;
+      font-family: 'Fira Mono';
+      letter-spacing: 7px;
+      padding: 12px 50px;
+      transform: rotate(-45deg) translate(-25%, -00%);
+      z-index: 9999; /*lel*/
     }
     .splashScreen__button:hover {
-      color: white;
-      background-color: rgba(178, 97, 166, 1.0);
+      color: #6DC6F6;
+      /*background-color: rgba(178, 97, 166, 1.0);*/
+      background-color: #F66DE5;
+      box-shadow: -10px 10px 0px #6DC6F6;
     }
 
+    .splashScreen__icons {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+
+    }
+
+    .splashScreen__icons .splashScreen__link {
+      height: 15.5px;
+    }
+    .splashScreen__icons .splashScreen__link img{
+      width: auto;
+      height: 15.5px;
+    }
 
     .splashScreen__author {
       position: absolute;
       bottom: 10px;
-      right: 10px;
+      left: 10px;
+      font-family: 'Fira Mono';
+      color: #F86274;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 8pt;
     }
     .splashScreen__link {
-      color: white;
-      font-family: 'Lato';
+      color: #3FA1FD;
       text-decoration: none;
+    }
+
+    .splashScreen__lol {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+      background: url('./assets/images/bullets.png');
+      background-size: cover;
+      width: 635px;
+      height: 318.5px;
     }
 
 
@@ -108,18 +151,24 @@
   </style>
 </head>
 <body>
-  <div class="splashScreen">
+  <div class="splashScreen is-hidden">
     <div class="splashScreen__container">
       <div class="splashScreen__title">
-        Musical Foetus
+        <img src="./assets/images/logo.png" alt="suki" />
       </div>
       <button class="splashScreen__button" id="start">
-        Let's give music to Foetus
+        start
       </button>
       <div class="splashScreen__author">
-        <a class="splashScreen__link" href="http://twitter.com/madjidtaha_" target="blank">
-          Madjid Taha
-        </a>
+        Design by <a class="splashScreen__link lolda" href="http://tonytran.fr/" target="blank">Tony Tran</a><br>
+        An experiment by <a class="splashScreen__link loldev" href="http://twitter.com/madjidtaha_" target="blank"> Madjid Taha</a>
+      </div>
+      <div class="splashScreen__icons">
+        <a class="splashScreen__link" href="http://twitter.com/madjidtaha_" target="blank"><img src="./assets/images/twitter.png" alt="twitter" /></a>
+        <a class="splashScreen__link" href="http://github.com/madjidtaha" target="blank"><img src="./assets/images/github.png" alt="github" /></a>
+        <!-- An experiment by <a class="splashScreen__link" href="http://twitter.com/madjidtaha_" target="blank"> Madjid Taha</a> -->
+      </div>
+      <div class="splashScreen__lol">
       </div>
     </div>
   </div>

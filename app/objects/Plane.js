@@ -12,7 +12,7 @@ export default class Plane extends THREE.Object3D {
     this.mat = new THREE.MeshPhongMaterial(
       {
         // color: 0xC0970E,
-        color: 0x506f86,
+        color: 0xF9FF9B,
         // wireframe: true,
         side: THREE.DoubleSide,
       });

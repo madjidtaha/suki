@@ -25,7 +25,9 @@ void main() {
 
     vec3 color = vec3(amod < stripe ? 1.0 : 0.0);
     if (gl_FrontFacing) {
-      gl_FragColor = vec4( vec3(0.36, 0.28, 0.47), 1.0 - color.r );
+      // F86274
+      // CF5261
+      gl_FragColor = vec4( vec3(0.97, 0.38, 0.45), 1.0 - color.r );
     }
     else {
       vec3 hsvColor = hsv2rgb(vec3(soundFreq));

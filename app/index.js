@@ -25,6 +25,7 @@ function animate(ts) {
 }
 
 function initGUI() {
+  console.log('gui');
   // GUI settings
   window.gui = gui = new dat.GUI();
 
@@ -73,6 +74,10 @@ function startExperiment() {
 
 domready(() => {
 
+  setTimeout(()=> {
+    document.getElementsByClassName('splashScreen')[0].classList.remove('is-hidden');
+  }, 2000);
+
   // FIXME Go to Webgl.js and read
   window.isPlaying = false;
 
@@ -87,7 +92,7 @@ domready(() => {
   webgl = new Webgl(window.innerWidth, window.innerHeight);
   document.body.appendChild(webgl.renderer.domElement);
 
-  // initGUI();
+  initGUI();
 
   // handle resize
   window.onresize = resizeHandler;
